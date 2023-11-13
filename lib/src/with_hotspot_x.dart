@@ -7,7 +7,7 @@ extension WithHotspotX on Widget {
   Widget withHotspot({
     String flow = 'main',
     required num order,
-    required String title,
+    String? title,
     required String text,
     Widget? icon,
     Size? hotspotSize,
@@ -34,13 +34,13 @@ extension WithHotspotX on Widget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    if (title.isNotEmpty)
+                    if (title != null && title.isNotEmpty)
                       Text(
                         title,
                         style: theme.textTheme.titleMedium!
                             .copyWith(fontWeight: FontWeight.w600),
                       ),
-                    if (title.isNotEmpty && text.isNotEmpty)
+                    if (title != null && title.isNotEmpty && text.isNotEmpty)
                       SizedBox(
                         height: 12,
                       ),

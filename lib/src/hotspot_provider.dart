@@ -92,6 +92,7 @@ class HotspotProvider extends StatefulWidget {
     this.bodyPadding = const EdgeInsets.all(16),
     this.dismissibleSkrim = false,
     this.skrimCurve = Curves.easeOutExpo,
+    this.onDismiss
   }) : super(key: key);
 
   /// The child which contains multiple [HotspotTarget] in the tree.
@@ -140,6 +141,9 @@ class HotspotProvider extends StatefulWidget {
 
   /// Curve for the skrim.
   final Curve skrimCurve;
+
+  /// onDismissCallback
+  final Function(String flow)? onDismiss;
 
   /// Retreive the ancestor [HotspotProvider] for the purpose of performing actions.
   static HotspotProviderState of(BuildContext context) =>
@@ -215,8 +219,9 @@ class HotspotProviderState extends State<HotspotProvider>
   /// Can be called externally.
   void dismiss() {
     _pruneUnmountedTargets();
-
+    final _flow = currentFlow[_index].widget.flow;
     setState(() => _visible = false);
+    widget.onDismiss?.call(_flow);
 
     /// Put the focus back where it was if we
     /// have a previously-saved focus node.

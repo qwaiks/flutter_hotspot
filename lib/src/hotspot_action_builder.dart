@@ -61,14 +61,11 @@ class HotspotActionBuilder extends StatelessWidget {
           SizedBox(width: 18),
 
           /// Next / done button.
-          SizedBox(
-            width: 82,
-            child: ElevatedButton(
-              child: Text(controller.isLastPage ? 'Done' : 'Next'),
-              onPressed: () {
-                controller.next();
-              },
-            ),
+          ElevatedButton(
+            child: Text(controller.isLastPage ? 'Done' : 'Next'),
+            onPressed: () {
+              controller.next();
+            },
           ),
         ],
       ),
